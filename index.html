@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="InfoScreen" lang="no">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MyApp</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="css/weather-icons.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+    <div class="container-fluid text-center">
+        <div ng-controller="WeatherController as weather">
+            <h1><i ng-class="['wi', weather.icon]"></i> <span ng-bind="weather.temp"></span><i class="wi wi-celsius"></i></h1>
+            <p class="lead">{{weather.sunrise}}<i class="wi wi-sunrise"></i> | <i class="wi wi-sunset"></i>{{weather.sunset}}</p>
+            <hr>
+        </div>
+        <div class="row">
+            <div ng-controller="TimeController as time" class="col-sm-4">
+                <h1>Time</h1>
+                {{time.currentTime | date:'dd.MM HH:mm'}}
+            </div>
+            <div ng-controller="RuterController as ruter">
+
+                <div class="col-sm-4">
+                    <h1>Westbound</h1>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="departure in ruter.departures | direction:'2'">
+                            {{departure.DestinationDisplay}} ({{departure.ExpectedArrivalTime | fromNow}})
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <h1>Eastbound</h1>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="departure in ruter.departures | direction:'1'">
+                            {{departure.DestinationDisplay}} ({{departure.ExpectedArrivalTime | fromNow}})
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div ng-controller="RescueTimeController as rescueTime">
+                <h1>Efficiency {{rescueTime.efficiency}}%</h1>
+            </div>
+
+            <div ng-controller="GoogleCalendarController">
+                <div>
+                    <button ng-click="login()">Login</button>
+                    <select name="calendar" ng-model="selectedCalendar" ng-options="cal.summary for cal in calendars"></select>
+                    <button ng-click="loadCalendars()">Get Calendars</button>
+                    <button ng-click="loadEvents()">Get Calendar Entries</button>
+                </div>
+
+                <ul>
+                    <li ng-repeat="item in calendarItems">{{item.summary}}</li>
+                </ul>
+                <div ng-show="currentUser">
+                    <h1>You're authenticated!</h1>
+
+                    Logged in as {{currentUser.displayName}}
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+    <script src="https://apis.google.com/js/client.js"></script>
+    <script src="libs/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular-resource.min.js"></script>
+    <script src="libs/angular-googleapi.js"></script>
+
+
+    <script src="appbuild/myapp.min.js"></script>
+
+</body>
+
+</html>
