@@ -1,15 +1,9 @@
-angular-template
+Info Screen
 ================
 
-Starter template for angular project.
+Info screen utilizing angular, and APIs from
 
-Requirements: gulp
-npm install -g gulp
-
-Usage:
-
-npm install
-
-gulp
-
-js-files in /js/ will be compiled to appbuild folder.
+* Ruter
+* OpenWeatherMap
+* RescueTime
+* Google Calendar
