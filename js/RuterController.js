@@ -6,7 +6,7 @@ app.controller("RuterController", function($resource, $timeout){
     var ruter = this;
 
     var Departures = $resource(
-        "http://reis.trafikanten.no/ReisRest/RealTime/GetRealTimeData/:id",
+        "//reis.trafikanten.no/ReisRest/RealTime/GetRealTimeData/:id",
         {callback:"JSON_CALLBACK"},
         {get: {method: "JSONP", isArray:true}}
     );
