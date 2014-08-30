@@ -2,7 +2,7 @@
  * Created by storskel on 20.08.2014.
  */
 app.controller("WeatherController", function($http, $timeout){
-    var url = "//api.openweathermap.org/data/2.5/weather?q=Oslo&units=metric";
+    var url = "http://api.openweathermap.org/data/2.5/weather?q=Oslo&units=metric";
     var weather = this;
 
     function getWeather() {
